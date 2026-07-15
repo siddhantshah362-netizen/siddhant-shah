@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me - Siddhant Shah</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- Google Fonts: Impact for the heavy matchbox text, Noto Sans Devanagari for the Om symbol -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Font definitions */
+    .font-impact { font-family: 'Impact', sans-serif; }
+    .font-hindi { font-family: 'Noto Sans Devanagari', sans-serif; }
+    /* We use a monospace font for the small print to look like a vintage label */
+    .font-mono-label { font-family: monospace; }
+
+    body {
+      background-color: #000000;
+      color: white;
+      margin: 0;
+      height: 400vh; /* Plenty of room to scrub the animation */
+      overflow-x: hidden;
+    }
+
+    .gpu-accel {
+      will-change: transform, opacity;
+    }
+
+    /* Hide scrollbar for the inner yellow box but keep functionality */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    /* ========================================================
+       APPU MATCHBOX STYLING & COLORS
+       ======================================================== */
+    .appu-yellow { background-color: #f4ce14; }
+    .appu-red { background-color: #d32222; }
+    .appu-black { background-color: #1a1a1a; }
+
+    /* The heavy text stroke and shadow for HELLO and YOU */
+    .text-stroke-appu {
+      color: #f4ce14;
+      -webkit-text-stroke: 1.5px #1a1a1a;
+      text-shadow: 3px 3px 0px #1a1a1a;
+    }
+
+    /* Inner hollow shadow for the drawer */
+    .box-hollow-shadow {
+      box-shadow: inset 0 40px 30px -20px rgba(0,0,0,0.9), 0 20px 50px rgba(0,0,0,0.8);
+    }
+
+    /* ========================================================
+       MATCHSTICKS (Uniform and properly spaced)
+       ======================================================== */
+    .stick {
+      width: 14px;
+      position: relative;
+      background: #e4b786;
+      border-right: 1px solid rgba(0,0,0,0.2);
+    }
+    .head {
+      position: absolute;
+      top: -14px; /* Sticks up out of the wood */
+      left: -1px;
+      width: 16px;
+      height: 20px;
+      border-radius: 6px 6px 3px 3px;
+      background: #d32222;
+      box-shadow: inset -2px -2px 3px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= BOUNCING ARROW INDICATOR ================= -->
+  <div id="scroll-indicator" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-10 transition-opacity duration-300 animate-bounce">
+    <svg class="w-12 h-12 text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </div>
+
+  <!-- ================= STICKY SCROLL CONTAINER ================= -->
+  <div class="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center z-20">
+
+    <!-- THE 3D MATCHBOX -->
+    <div id="matchbox-container" class="relative w-[300px] h-[400px] md:w-[360px] md:h-[480px]">
+      
+      <!-- 1. THE DRAWER -->
+      <div id="matchbox-drawer" class="absolute inset-x-2 top-0 bottom-0 bg-[#2b170a] z-10 flex justify-evenly px-2 pt-6 overflow-hidden gpu-accel">
+        <div class="stick h-[95%]"><div class="head"></div></div>
+        <div class="stick h-[95%]"><div class="head"></div></div>
+        <div class="stick h-[95%]"><div class="head"></div></div>
+        <div class="stick h-[95%]"><div class="head"></div></div>
+        <div class="stick h-[95%]"><div class="head"></div></div>
+        <div class="stick h-[95%]"><div class="head"></div></div>
+        <div class="stick h-[95%]"><div class="head"></div></div>
+        <div class="stick h-[95%]"><div class="head"></div></div>
+        <div class="stick h-[95%]"><div class="head"></div></div>
+        <div class="stick h-[95%]"><div class="head"></div></div>
+        <div class="stick h-[95%]"><div class="head"></div></div>
+        <div class="stick h-[95%]"><div class="head"></div></div>
+      </div>
+
+      <!-- 2. THE SLEEVE -->
+      <div id="matchbox-sleeve" class="absolute inset-0 z-20 origin-center gpu-accel box-hollow-shadow">
+        
+        <div class="relative w-full h-full appu-red border-[3px] border-[#f4ce14]">
+          
+          <div class="absolute top-3 left-3 md:top-4 md:left-4 w-10 h-10 md:w-11 md:h-11 appu-black rounded-full flex items-center justify-center text-[#f4ce14] font-hindi text-xl md:text-2xl leading-none pt-1 border-[2px] border-[#1a1a1a] z-20">ॐ</div>
+          <div class="absolute top-3 right-3 md:top-4 md:right-4 w-10 h-10 md:w-11 md:h-11 appu-black rounded-full flex items-center justify-center text-[#f4ce14] font-hindi text-xl md:text-2xl leading-none pt-1 border-[2px] border-[#1a1a1a] z-20">ॐ</div>
+          <div class="absolute bottom-3 left-3 md:bottom-4 md:left-4 w-10 h-10 md:w-11 md:h-11 appu-black rounded-full flex items-center justify-center text-[#f4ce14] font-hindi text-xl md:text-2xl leading-none pt-1 border-[2px] border-[#1a1a1a] z-20">ॐ</div>
+          <div class="absolute bottom-3 right-3 md:bottom-4 md:right-4 w-10 h-10 md:w-11 md:h-11 appu-black rounded-full flex items-center justify-center text-[#f4ce14] font-hindi text-xl md:text-2xl leading-none pt-1 border-[2px] border-[#1a1a1a] z-20">ॐ</div>
+
+          <!-- Left Text (HELLO) -->
+          <div class="absolute top-16 bottom-16 left-3 md:top-20 md:bottom-20 md:left-4 w-10 md:w-11 flex flex-col justify-between items-center text-[#f4ce14] font-impact text-3xl md:text-5xl text-stroke-appu z-10 py-1">
+            <span>H</span><span>E</span><span>L</span><span>L</span><span>O</span>
+          </div>
+
+          <!-- Right Text (YOU) -->
+          <div class="absolute top-16 bottom-16 right-3 md:top-20 md:bottom-20 md:right-4 w-10 md:w-11 flex flex-col justify-around items-center text-[#f4ce14] font-impact text-3xl md:text-5xl text-stroke-appu z-10 py-6">
+            <span>Y</span><span>O</span><span>U</span>
+          </div>
+
+          <!-- Center Yellow Box -->
+          <div id="sleeve-center-content" class="absolute top-16 bottom-16 left-16 right-16 md:top-20 md:bottom-20 md:left-20 md:right-20 appu-yellow border-[3px] border-[#1a1a1a] flex items-center justify-center overflow-hidden gpu-accel z-10">
+            <!-- The Photo -->
+            <div class="relative w-[80%] h-[85%] border-[4px] border-[#1a1a1a] rounded-[50%] flex justify-center items-center overflow-hidden bg-white">
+               <img src="IMG_4990.JPG" alt="Siddhant" class="w-full h-full object-cover filter contrast-[110%] saturate-[120%] sepia-[20%] brightness-[105%]">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= FINAL STATIC FRAME ================= -->
+  <div id="final-blank-canvas" class="fixed inset-0 z-40 opacity-0 pointer-events-none transition-opacity duration-300">
+    
+    <div class="relative w-full h-full appu-red border-[4px] border-[#f4ce14]">
+      
+      <!-- Corner Circles -->
+      <div class="absolute top-4 left-4 md:top-6 md:left-6 w-16 h-16 md:w-20 md:h-20 appu-black rounded-full flex items-center justify-center text-[#f4ce14] font-hindi text-3xl md:text-5xl pt-1 border-[3px] border-[#1a1a1a]">ॐ</div>
+      <div class="absolute top-4 right-4 md:top-6 md:right-6 w-16 h-16 md:w-20 md:h-20 appu-black rounded-full flex items-center justify-center text-[#f4ce14] font-hindi text-3xl md:text-5xl pt-1 border-[3px] border-[#1a1a1a]">ॐ</div>
+      <div class="absolute bottom-4 left-4 md:bottom-6 md:left-6 w-16 h-16 md:w-20 md:h-20 appu-black rounded-full flex items-center justify-center text-[#f4ce14] font-hindi text-3xl md:text-5xl pt-1 border-[3px] border-[#1a1a1a]">ॐ</div>
+      <div class="absolute bottom-4 right-4 md:bottom-6 md:right-6 w-16 h-16 md:w-20 md:h-20 appu-black rounded-full flex items-center justify-center text-[#f4ce14] font-hindi text-3xl md:text-5xl pt-1 border-[3px] border-[#1a1a1a]">ॐ</div>
+
+      <!-- MAIN CONTENT BOX -->
+      <div class="absolute top-24 bottom-24 left-24 right-24 md:top-32 md:bottom-32 md:left-32 md:right-32 flex flex-col appu-yellow border-[4px] border-[#1a1a1a] shadow-inner overflow-y-auto no-scrollbar p-6 md:p-12">
+        
+        <!-- HEADER -->
+        <div class="flex flex-col md:flex-row justify-between md:items-end border-b-[4px] border-[#1a1a1a] pb-4 mb-6">
+          <h1 class="font-impact text-5xl md:text-7xl text-[#d32222] uppercase tracking-wide leading-none drop-shadow-sm">Siddhant Shah</h1>
+          <div class="font-mono-label text-sm md:text-base font-bold text-[#1a1a1a] text-right mt-2 md:mt-0 tracking-widest leading-tight uppercase">
+            <p>Export Quality</p>
+            <p>Strike Anywhere.</p>
+          </div>
+        </div>
+
+        <!-- 2-COLUMN LAYOUT -->
+        <div class="flex flex-col md:flex-row gap-8 md:gap-12 flex-grow">
+          
+          <!-- LEFT COL: BIO -->
+          <div class="md:w-2/3 flex flex-col font-mono-label text-[#1a1a1a] text-base md:text-lg leading-relaxed font-bold">
+            
+            <p class="text-xl md:text-2xl text-[#d32222] uppercase border-b-2 border-[#1a1a1a] pb-2 mb-6 inline-block w-fit">Pause on the fun stuff for now. On to some real sh*t.</p>
+            
+            <div class="flex flex-col gap-6">
+              <p>I am a music industry professional that has lived ear to ear and smile to smile with the Canadian Music Industry for 4+ years.</p>
+              <p>Having graduated from Music Business Management, I joined The Canadian Independent Music Association (CIMA) as the Creative Strategist, Membership Outreach Officer, Administrator and operations, and Event Management for almost two years now.</p>
+              <p>I am open to wear any hats needed, bringing in a vast network and expertise of all different shapes and sizes.</p>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COL: RESEARCH PAPER, CONTACT & BARCODE -->
+          <div class="md:w-1/3 flex flex-col gap-6">
+            
+            <!-- RESEARCH PAPER HIGHLIGHT -->
+            <div class="border-[3px] border-[#1a1a1a] p-4 bg-[#d32222] shadow-sm">
+              <h2 class="font-impact text-2xl text-[#f4ce14] uppercase border-b-2 border-[#1a1a1a] pb-2 mb-3">Featured Research</h2>
+              
+              <p class="font-mono-label text-sm font-bold text-[#1a1a1a] leading-tight mb-5">
+                Read my research paper on building bridges between the Indian and the Canadian Music Industry.
+              </p>
+
+              <!-- DOWNLOAD BUTTON WITH URL ENCODED FILENAME -->
+              <a href="Building%20Bridges%20Report_Siddhant%20Shah.pdf" target="_blank" class="block w-full text-center border-2 border-[#1a1a1a] bg-[#1a1a1a] text-[#f4ce14] font-impact text-lg py-2 uppercase hover:bg-transparent hover:text-[#1a1a1a] transition-colors cursor-pointer tracking-wider">
+                KNOCK YOURSELF OUT
+              </a>
+            </div>
+            
+            <!-- CONTACT STAMP -->
+            <div class="p-4 border-[3px] border-[#1a1a1a] bg-[#f4ce14] shadow-[5px_5px_0_#d32222] flex flex-col gap-3 w-full hover:scale-[1.02] transition-transform">
+              <p class="font-impact text-2xl text-[#1a1a1a] uppercase tracking-widest mb-1 border-b-2 border-[#1a1a1a] pb-1">Direct Line / Comms</p>
+              
+              <a href="mailto:siddhant.shah362@gmail.com" class="font-mono-label font-black text-[#1a1a1a] hover:text-[#d32222] transition-colors flex flex-wrap items-center gap-2 text-xs md:text-sm lg:text-base">
+                <span class="bg-[#1a1a1a] text-[#f4ce14] px-2 py-1 text-xs border border-[#1a1a1a]">EMAIL</span> 
+                siddhant.shah362@gmail.com
+              </a>
+              
+              <a href="tel:+16477829305" class="font-mono-label font-black text-[#1a1a1a] hover:text-[#d32222] transition-colors flex flex-wrap items-center gap-2 text-xs md:text-sm lg:text-base">
+                <span class="bg-[#1a1a1a] text-[#f4ce14] px-2 py-1 text-xs border border-[#1a1a1a]">PHONE</span> 
+                +1 647 782 9305
+              </a>
+            </div>
+
+            <!-- FAKE BARCODE -->
+            <div class="mt-auto pb-4 pt-4">
+              <div class="flex gap-[2px] h-16 w-full opacity-90 justify-center items-end">
+                <div class="w-1.5 h-full bg-[#1a1a1a]"></div><div class="w-1 h-full bg-[#1a1a1a]"></div><div class="w-2.5 h-[90%] bg-[#1a1a1a]"></div><div class="w-1 h-full bg-[#1a1a1a]"></div><div class="w-3 h-full bg-[#1a1a1a]"></div><div class="w-1 h-[85%] bg-[#1a1a1a]"></div><div class="w-2 h-full bg-[#1a1a1a]"></div><div class="w-4 h-[95%] bg-[#1a1a1a]"></div><div class="w-1.5 h-full bg-[#1a1a1a]"></div><div class="w-2 h-full bg-[#1a1a1a]"></div><div class="w-1 h-full bg-[#1a1a1a]"></div><div class="w-3 h-[90%] bg-[#1a1a1a]"></div><div class="w-1.5 h-full bg-[#1a1a1a]"></div>
+              </div>
+              <p class="font-mono-label text-[11px] text-center text-[#1a1a1a] font-black mt-1 tracking-[0.3em]">SID-2026-X</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <script>
+    const drawer = document.getElementById('matchbox-drawer');
+    const sleeve = document.getElementById('matchbox-sleeve');
+    const sleeveCenter = document.getElementById('sleeve-center-content');
+    const scrollIndicator = document.getElementById('scroll-indicator');
+    const finalCanvas = document.getElementById('final-blank-canvas');
+
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      lastScrollY = window.scrollY;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateScrollAnimation(lastScrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    function updateScrollAnimation(scrollY) {
+      const maxScroll = document.body.scrollHeight - window.innerHeight;
+      const progress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
+
+      // Fade out arrow immediately upon scrolling
+      scrollIndicator.style.opacity = Math.max(0, 1 - (progress * 8));
+
+      // Phase 1: Matches slide out
+      const drawerProgress = Math.min(progress / 0.25, 1);
+      const easeDrawer = drawerProgress * (2 - drawerProgress); 
+      drawer.style.transform = `translate3d(0, -${easeDrawer * 180}px, 0)`;
+
+      // Phase 2: Matchbox scales up to consume screen
+      let scaleProgress = 0;
+      if (progress > 0.25) {
+        scaleProgress = Math.min((progress - 0.25) / 0.60, 1);
+      }
+      
+      const easeScale = scaleProgress * scaleProgress * scaleProgress;
+      const currentScale = 1 + (easeScale * 14); 
+      sleeve.style.transform = `scale3d(${currentScale}, ${currentScale}, 1)`;
+
+      // Fade out ONLY the photo center inside the matchbox as it zooms
+      let contentFade = 1;
+      if (scaleProgress > 0.2) {
+        contentFade = 1 - Math.min(1, (scaleProgress - 0.2) / 0.2);
+      }
+      sleeveCenter.style.opacity = contentFade;
+
+      // Phase 3: Seamless crossfade to fixed UI
+      if (progress > 0.85) {
+        finalCanvas.style.opacity = '1';
+        finalCanvas.style.pointerEvents = 'auto'; 
+      } else {
+        finalCanvas.style.opacity = '0';
+        finalCanvas.style.pointerEvents = 'none';
+      }
+    }
+    
+    updateScrollAnimation(window.scrollY);
+  </script>
+</body>
+</html>

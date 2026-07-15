@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>After Party - Siddhant Shah</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- Google Fonts: Impact & Courier Prime -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Impact&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Font Definitions */
+    .font-impact { font-family: 'Impact', sans-serif; }
+    .font-mono-tech { font-family: 'Courier Prime', monospace; }
+
+    body {
+      background-color: #050505;
+      color: #ffffff;
+      margin: 0;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* =========================================
+       DYNAMIC NEON SPOTLIGHT CURSOR
+       ========================================= */
+    #spotlight {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(200, 0, 255, 0.15) 0%, rgba(0, 210, 255, 0.05) 40%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      mix-blend-mode: screen;
+      will-change: transform;
+    }
+    
+    #cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      background-color: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      box-shadow: 0 0 10px #fff, 0 0 20px #c800ff;
+    }
+
+    .hover-active #cursor-dot {
+      transform: translate(-50%, -50%) scale(4);
+      background-color: transparent;
+      border: 2px solid #00d2ff;
+      box-shadow: 0 0 15px #00d2ff;
+    }
+
+    /* =========================================
+       NEON TEXT EFFECTS
+       ========================================= */
+    .neon-text-pink {
+      color: #fff;
+      text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #e60073,
+        0 0 40px #e60073,
+        0 0 80px #e60073;
+      animation: flicker 4s infinite alternate;
+    }
+
+    .neon-text-blue {
+      color: #fff;
+      text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #00d2ff,
+        0 0 40px #00d2ff,
+        0 0 80px #00d2ff;
+    }
+
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #e60073, 0 0 40px #e60073, 0 0 80px #e60073; opacity: 1; }
+      20%, 24%, 55% { text-shadow: none; opacity: 0.8; }
+    }
+
+    /* =========================================
+       HOLOGRAPHIC VIP PASS (3D Glassmorphism)
+       ========================================= */
+    .vip-pass {
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(200, 0, 255, 0.2);
+      border-radius: 20px;
+      transform-style: preserve-3d;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Holographic sheen overlay */
+    .vip-pass::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(125deg, 
+        transparent 20%, 
+        rgba(0, 210, 255, 0.3) 40%, 
+        rgba(200, 0, 255, 0.3) 60%, 
+        transparent 80%);
+      background-size: 200% 200%;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .vip-pass:hover::after {
+      opacity: 1;
+      animation: holo-sheen 3s infinite linear;
+    }
+
+    @keyframes holo-sheen {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Ticket Hole punch */
+    .ticket-hole {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 15px;
+      background: #050505;
+      border-radius: 20px;
+      box-shadow: inset 0 5px 10px rgba(0,0,0,0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* Ambient Club Smoke/Fog */
+    .smoke-overlay {
+      position: fixed;
+      inset: 0;
+      background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+      opacity: 0.15;
+      z-index: -1;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-center items-center p-6 md:p-12">
+
+  <!-- Interactive Spotlights & Cursors -->
+  <div id="spotlight"></div>
+  <div id="cursor-dot"></div>
+  <div class="smoke-overlay"></div>
+
+  <!-- NAVIGATION -->
+  <div class="absolute top-8 left-8 z-50">
+    <a href="javascript:history.back()" class="font-mono-tech text-white text-sm md:text-base tracking-[0.2em] uppercase hover:text-[#00d2ff] transition-colors cursor-trigger border border-white/20 px-4 py-2 hover:border-[#00d2ff] backdrop-blur-md bg-black/30">
+      [ EXIT CLUB ]
+    </a>
+  </div>
+
+  <main class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center z-10 mt-16 lg:mt-0">
+    
+    <!-- LEFT: NEON TYPOGRAPHY & CONTEXT -->
+    <div class="flex flex-col gap-6 text-center lg:text-left cursor-trigger">
+      
+      <p class="font-mono-tech text-[#00d2ff] tracking-[0.3em] uppercase text-sm md:text-base font-bold">
+        Hosted by CIMA • Year 05
+      </p>
+      
+      <h1 class="font-impact text-6xl md:text-8xl lg:text-9xl uppercase leading-[0.85] tracking-tight">
+        The Indie <br>
+        <span class="neon-text-pink">After Party</span>
+      </h1>
+      
+      <div class="font-mono-tech text-lg md:text-xl text-gray-300 leading-relaxed max-w-xl mx-auto lg:mx-0 mt-6 border-l-4 border-[#e60073] pl-6 bg-white/5 py-4 backdrop-blur-sm">
+        <p class="mb-4">
+          One of the most reputable afterparties of the entire JUNO Awards week. 
+        </p>
+        <p class="font-bold text-white">
+          This is where you will see the entire industry feeling at home.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: 3D HOLOGRAPHIC VIP PASS -->
+    <div class="flex justify-center cursor-trigger">
+      
+      <!-- Vanilla Tilt Container -->
+      <div class="vip-pass w-full max-w-md p-8 pt-16 pb-12 flex flex-col items-center text-center" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
+        
+        <div class="ticket-hole"></div>
+
+        <h2 class="font-impact text-4xl text-white uppercase tracking-widest mb-2 transform translate-z-[40px]">Access Granted</h2>
+        <p class="font-mono-tech text-[#00d2ff] text-sm tracking-[0.2em] mb-8 uppercase transform translate-z-[30px]">Staff / Management</p>
+
+        <!-- The Stats -->
+        <div class="w-full bg-black/40 rounded-lg p-6 mb-8 border border-white/10 transform translate-z-[50px] shadow-2xl">
+          <h3 class="font-impact neon-text-blue text-6xl mb-1">600+</h3>
+          <p class="font-mono-tech text-gray-400 text-xs tracking-widest uppercase">People In & Out During The Night</p>
+          <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent my-4"></div>
+          <p class="font-mono-tech font-bold text-white text-sm uppercase tracking-wider">The most successful year to date.</p>
+        </div>
+
+        <!-- The Role / Execution -->
+        <div class="w-full text-left transform translate-z-[30px]">
+          <p class="font-mono-tech text-gray-500 text-xs tracking-[0.2em] uppercase mb-4 border-b border-white/10 pb-2">Operational Scope</p>
+          <ul class="font-mono-tech text-sm text-gray-200 space-y-3">
+            <li class="flex items-center gap-3">
+              <span class="w-2 h-2 rounded-full bg-[#e60073] shadow-[0_0_10px_#e60073]"></span> Led Creative Strategy
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-2 h-2 rounded-full bg-[#e60073] shadow-[0_0_10px_#e60073]"></span> Ticketing Operations
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-2 h-2 rounded-full bg-[#e60073] shadow-[0_0_10px_#e60073]"></span> Core Event Management
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-2 h-2 rounded-full bg-[#00d2ff] shadow-[0_0_10px_#00d2ff]"></span> Assisted with Sponsorships
+            </li>
+          </ul>
+        </div>
+
+        <!-- Barcode -->
+        <div class="mt-10 w-full flex justify-center opacity-70 transform translate-z-[20px]">
+          <div class="flex gap-1 h-12 w-full justify-center">
+            <div class="w-2 h-full bg-white"></div><div class="w-1 h-full bg-white"></div><div class="w-3 h-full bg-white"></div><div class="w-1 h-full bg-white"></div><div class="w-4 h-full bg-white"></div><div class="w-1 h-full bg-white"></div><div class="w-2 h-full bg-white"></div><div class="w-1 h-full bg-white"></div><div class="w-3 h-full bg-white"></div><div class="w-2 h-full bg-white"></div><div class="w-1 h-full bg-white"></div><div class="w-4 h-full bg-white"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Vanilla Tilt JS for the 3D Holographic Pass -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  
+  <script>
+    // Custom Flashlight Cursor Logic
+    const spotlight = document.getElementById('spotlight');
+    const cursorDot = document.getElementById('cursor-dot');
+    const triggers = document.querySelectorAll('.cursor-trigger, a');
+
+    window.addEventListener('mousemove', (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      
+      // Move both the spotlight gradient and the center dot
+      spotlight.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+      cursorDot.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+    });
+
+    // Hover States
+    triggers.forEach(trigger => {
+      trigger.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
+      trigger.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
+    });
+  </script>
+</body>
+</html>

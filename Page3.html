@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Make It Music - Siddhant Shah</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- Fonts matching the home page vibe -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Impact&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Font definitions */
+    .font-impact { font-family: 'Impact', sans-serif; }
+    .font-mono-tech { font-family: 'Courier Prime', monospace; }
+
+    body {
+      background-color: #0a0a0a;
+      color: white;
+      margin: 0;
+      overflow-x: hidden;
+      cursor: none; /* Hiding default cursor for our custom one */
+    }
+
+    /* =========================================
+       CUSTOM FESTIVAL CURSOR
+       ========================================= */
+    #custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 24px;
+      height: 24px;
+      background-color: #f4ce14;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: width 0.2s, height 0.2s, background-color 0.2s;
+      will-change: transform;
+    }
+    
+    /* When hovering over links, the cursor expands and turns pink */
+    .hover-active #custom-cursor {
+      width: 60px;
+      height: 60px;
+      background-color: #ff8ab4;
+    }
+
+    /* =========================================
+       WILD BLOB BACKGROUND
+       ========================================= */
+    .blob-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: #0a0a0a;
+      overflow: hidden;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.7;
+      animation: float-wild 12s infinite ease-in-out alternate;
+      will-change: transform;
+    }
+    .blob-blue { background: #1a5bff; width: 60vw; height: 60vw; top: -10%; left: -20%; }
+    .blob-green { background: #00d26a; width: 50vw; height: 50vw; top: 40%; right: -10%; animation-delay: -3s; animation-duration: 15s;}
+    .blob-pink { background: #f4a6d7; width: 55vw; height: 55vw; bottom: -20%; left: 10%; animation-delay: -5s; animation-duration: 18s;}
+    .blob-yellow { background: #fce100; width: 40vw; height: 40vw; top: 10%; left: 40%; animation-delay: -7s; }
+
+    @keyframes float-wild {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate(60px, 80px) scale(1.1) rotate(10deg); }
+      100% { transform: translate(-40px, 40px) scale(0.9) rotate(-10deg); }
+    }
+
+    /* Grunge/Noise Overlay */
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.25;
+      background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+      pointer-events: none;
+    }
+
+    /* =========================================
+       INFINITE SCROLLING TICKET MARQUEE
+       ========================================= */
+    @keyframes marquee-fast {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-container {
+      display: flex;
+      width: max-content;
+      animation: marquee-fast 15s linear infinite;
+    }
+
+    /* =========================================
+       BRUTALIST CARDS & 3D TILT
+       ========================================= */
+    .brutalist-card {
+      border: 3px solid #fff;
+      box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.2);
+      transform-style: preserve-3d;
+      transition: box-shadow 0.3s ease;
+    }
+    
+    /* The Tape for the photo */
+    .tape {
+      background-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+  </style>
+</head>
+<body class="relative">
+
+  <!-- Custom Cursor -->
+  <div id="custom-cursor"></div>
+
+  <!-- Backgrounds -->
+  <div class="blob-bg">
+    <div class="blob blob-blue"></div>
+    <div class="blob blob-green"></div>
+    <div class="blob blob-pink"></div>
+    <div class="blob blob-yellow"></div>
+  </div>
+  <div class="noise-overlay"></div>
+
+  <!-- Top Marquee Banner -->
+  <div class="w-full bg-[#fce100] border-b-4 border-black overflow-hidden py-2 cursor-trigger">
+    <div class="marquee-container text-black font-impact text-2xl uppercase tracking-widest">
+      <span>700+ ATTENDEES • 2 DAYS OF MUSIC • INTERNATIONAL DELEGATES • YEAR 3 • MAKE IT MUSIC • 700+ ATTENDEES • 2 DAYS OF MUSIC • INTERNATIONAL DELEGATES • YEAR 3 • MAKE IT MUSIC • &nbsp;</span>
+      <span>700+ ATTENDEES • 2 DAYS OF MUSIC • INTERNATIONAL DELEGATES • YEAR 3 • MAKE IT MUSIC • 700+ ATTENDEES • 2 DAYS OF MUSIC • INTERNATIONAL DELEGATES • YEAR 3 • MAKE IT MUSIC • &nbsp;</span>
+    </div>
+  </div>
+
+  <div class="w-full max-w-6xl mx-auto px-4 md:px-8 py-8 flex flex-col items-center">
+    
+    <!-- BACK BUTTON -->
+    <div class="w-full flex justify-start mb-4">
+      <a href="javascript:history.back()" class="font-mono-tech text-white text-lg hover:text-[#fce100] transition-colors cursor-trigger uppercase font-bold tracking-widest border-b-2 border-transparent hover:border-[#fce100]">
+        [ ← Return to Base ]
+      </a>
+    </div>
+
+    <!-- MAIN HERO LOGO (CLICKABLE) -->
+    <a href="https://makeitmusic2025.vfairs.com/" target="_blank" class="cursor-trigger relative group z-10 w-full max-w-2xl flex justify-center mb-12" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-perspective="500">
+      <img src="MIM.png" alt="Make It Music Logo" class="w-full drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-500">
+      <!-- Hover instruction -->
+      <div class="absolute -bottom-6 bg-black text-[#00d26a] font-mono-tech font-bold px-4 py-1 border-2 border-[#00d26a] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-z-[50px]">
+        Click to visit the official site
+      </div>
+    </a>
+
+    <!-- HEADLINE -->
+    <h1 class="font-impact text-5xl md:text-7xl lg:text-8xl text-center uppercase tracking-tight leading-[0.9] text-white drop-shadow-[4px_4px_0_#1a5bff] mb-16 max-w-4xl cursor-trigger">
+      The Only Fully Independent <br>
+      <span class="text-[#fce100] drop-shadow-[4px_4px_0_#ff2d12]">Music Industry Conference.</span>
+    </h1>
+
+    <!-- 2-COLUMN GRID FOR FACTS & ROLE -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full mb-20 z-10">
+      
+      <!-- LEFT COL: THE FACTS -->
+      <div class="brutalist-card bg-[#1a5bff] p-8 flex flex-col justify-between cursor-trigger" data-tilt data-tilt-max="5" data-tilt-speed="400">
+        <div>
+          <h2 class="font-impact text-4xl md:text-5xl text-white uppercase mb-4 tracking-wide border-b-4 border-white pb-2">The Scale</h2>
+          <p class="font-mono-tech font-bold text-xl leading-relaxed text-white mb-6">
+            This year marked <span class="bg-[#fce100] text-black px-2 py-0.5">Year 3</span> of CIMA hosting Make It Music. It is a 2-day conference which focuses on all things music, from educational panels to interactive showcases.
+          </p>
+          <ul class="font-impact text-2xl md:text-3xl space-y-3 text-white uppercase tracking-wider">
+            <li class="flex items-center gap-3"><span class="text-[#00d26a]">►</span> 700+ Attendees</li>
+            <li class="flex items-center gap-3"><span class="text-[#00d26a]">►</span> Government Officials</li>
+            <li class="flex items-center gap-3"><span class="text-[#00d26a]">►</span> Intl. Music Delegates</li>
+          </ul>
+        </div>
+        
+        <!-- WIN Music Board Link Box -->
+        <div class="mt-8 bg-black p-4 border-2 border-[#00d26a]">
+          <p class="font-mono-tech text-white font-bold mb-2">FEATURING THE ENTIRE</p>
+          <a href="https://winformusic.org/" target="_blank" class="font-impact text-3xl text-[#00d26a] hover:text-[#fce100] transition-colors uppercase cursor-trigger underline decoration-4 underline-offset-4">
+            WIN Music Board ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT COL: VIP BACKSTAGE PASS (My Role) -->
+      <div class="brutalist-card bg-white text-black p-0 flex flex-col relative overflow-hidden cursor-trigger" data-tilt data-tilt-max="8" data-tilt-speed="400">
+        <!-- Pass Header -->
+        <div class="bg-[#ff2d12] w-full py-4 text-center border-b-4 border-black">
+          <h2 class="font-impact text-4xl text-white uppercase tracking-widest">Access All Areas</h2>
+        </div>
+        <!-- Pass Body -->
+        <div class="p-8 flex-grow flex flex-col justify-center">
+          <h3 class="font-mono-tech font-black text-2xl text-gray-500 uppercase tracking-widest mb-1">Staff Identifier</h3>
+          <h2 class="font-impact text-6xl uppercase mb-6 leading-none">Siddhant Shah</h2>
+          
+          <div class="space-y-4 font-mono-tech font-bold text-lg border-l-4 border-black pl-4">
+            <p>I was responsible for the <span class="bg-[#f4a6d7] px-1 border border-black">Creative Strategy</span> of this massive event.</p>
+            <p>Led the <span class="bg-[#fce100] px-1 border border-black">Programming & Management</span> front.</p>
+            <p>Assisted the Head of Marketing directly in securing <span class="bg-[#00d26a] px-1 border border-black text-white">Sponsorships & Private Equity</span>.</p>
+          </div>
+        </div>
+        <!-- Fake Barcode Footer -->
+        <div class="bg-black w-full h-16 flex items-center justify-center gap-1 p-2">
+          <div class="w-2 h-full bg-white"></div><div class="w-1 h-full bg-white"></div><div class="w-4 h-full bg-white"></div><div class="w-1 h-full bg-white"></div><div class="w-2 h-full bg-white"></div><div class="w-5 h-full bg-white"></div><div class="w-1 h-full bg-white"></div><div class="w-3 h-full bg-white"></div><div class="w-1 h-full bg-white"></div><div class="w-4 h-full bg-white"></div><div class="w-2 h-full bg-white"></div><div class="w-1 h-full bg-white"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEAM PHOTO (Polaroid Scrapbook Style) -->
+    <!-- Using exact filename Image.jpg -->
+    <div class="relative w-full max-w-4xl z-20 cursor-trigger mt-10 mb-24" data-tilt data-tilt-max="5" data-tilt-speed="400">
+      
+      <!-- Top Tape -->
+      <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-40 h-10 tape -rotate-2 z-30"></div>
+      
+      <!-- Photo Wrapper -->
+      <div class="bg-[#fce100] p-4 pb-16 md:p-6 md:pb-20 border-4 border-black shadow-[15px_15px_0_#1a5bff] transform rotate-1 transition-transform duration-500 hover:rotate-0">
+        
+        <img src="Image.jpg" alt="Make It Music CIMA Team" class="w-full h-auto border-2 border-black object-cover bg-black min-h-[300px]">
+        
+        <p class="absolute bottom-4 right-6 font-impact text-3xl md:text-5xl text-black uppercase tracking-wider">
+          CIMA TEAM • YEAR 3
+        </p>
+      </div>
+      
+      <!-- Bottom Tape -->
+      <div class="absolute -bottom-4 right-10 w-24 h-10 tape rotate-6 z-30"></div>
+    </div>
+
+  </div>
+
+  <!-- Scripts for Custom Cursor & 3D Vanilla Tilt -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  
+  <script>
+    // Custom Cursor Logic
+    const cursor = document.getElementById('custom-cursor');
+    const triggers = document.querySelectorAll('.cursor-trigger'); // Elements that make the cursor expand
+
+    window.addEventListener('mousemove', (e) => {
+      cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+    });
+
+    // Add hover effect to all interactive elements
+    triggers.forEach(trigger => {
+      trigger.addEventListener('mouseenter', () => {
+        document.body.classList.add('hover-active');
+      });
+      trigger.addEventListener('mouseleave', () => {
+        document.body.classList.remove('hover-active');
+      });
+    });
+
+    // Handle iframe/links so cursor resets properly
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        document.body.classList.add('hover-active');
+      });
+      link.addEventListener('mouseleave', () => {
+        document.body.classList.remove('hover-active');
+      });
+    });
+  </script>
+</body>
+</html>
