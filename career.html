@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career At A Glance - Siddhant Shah</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Impact&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    .font-impact { font-family: 'Impact', sans-serif; }
+    .font-mono { font-family: 'Courier Prime', monospace; }
+    .font-syne { font-family: 'Syne', sans-serif; }
+
+    body {
+      background-color: #050505;
+      color: #ffffff;
+      margin: 0;
+      overflow-x: hidden;
+      cursor: none;
+      scroll-behavior: smooth;
+    }
+
+    /* =========================================
+       DYNAMIC SPOTLIGHT & CURSOR
+       ========================================= */
+    #spotlight {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(0, 210, 255, 0.02) 40%, transparent 60%);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      mix-blend-mode: screen;
+      will-change: transform;
+    }
+    
+    #cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 12px;
+      height: 12px;
+      background-color: #fce100;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      box-shadow: 0 0 10px #fce100, 0 0 20px #ff0055;
+      transition: width 0.2s, height 0.2s, background-color 0.2s;
+    }
+
+    .hover-active #cursor-dot {
+      width: 60px;
+      height: 60px;
+      background-color: transparent;
+      border: 2px solid #ff0055;
+      box-shadow: 0 0 15px #ff0055;
+    }
+
+    /* Ambient Smoke */
+    .smoke-overlay {
+      position: fixed;
+      inset: 0;
+      background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+      opacity: 0.15;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* =========================================
+       GLITCH TEXT EFFECT
+       ========================================= */
+    .glitch-text {
+      position: relative;
+      display: inline-block;
+      color: #ffffff;
+    }
+    
+    .glitch-text::before, .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #050505;
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    
+    .glitch-text:hover::before,
+    .glitch-text:hover::after {
+      opacity: 1;
+    }
+
+    .glitch-text:hover { color: transparent; }
+
+    .glitch-text::before {
+      left: 2px;
+      text-shadow: -2px 0 #ff0055;
+      animation: glitch-anim-1 2s infinite linear alternate-reverse;
+    }
+    .glitch-text::after {
+      left: -2px;
+      text-shadow: -2px 0 #00ffff;
+      animation: glitch-anim-2 2.5s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim-1 {
+      0% { clip-path: inset(20% 0 80% 0); }
+      20% { clip-path: inset(60% 0 10% 0); }
+      40% { clip-path: inset(40% 0 50% 0); }
+      60% { clip-path: inset(80% 0 5% 0); }
+      80% { clip-path: inset(10% 0 70% 0); }
+      100% { clip-path: inset(30% 0 20% 0); }
+    }
+    @keyframes glitch-anim-2 {
+      0% { clip-path: inset(10% 0 60% 0); }
+      20% { clip-path: inset(80% 0 5% 0); }
+      40% { clip-path: inset(30% 0 20% 0); }
+      60% { clip-path: inset(70% 0 10% 0); }
+      80% { clip-path: inset(20% 0 50% 0); }
+      100% { clip-path: inset(50% 0 30% 0); }
+    }
+
+    /* =========================================
+       GLASSMORPHISM DOSSIER CARDS
+       ========================================= */
+    .dossier-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 0 10px rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .dossier-card:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 15px rgba(252, 225, 0, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .dossier-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.7s;
+    }
+    .dossier-card:hover::before { left: 150%; }
+
+    /* Tags */
+    .tag {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.3s;
+    }
+    .tag:hover {
+      background: #fce100;
+      color: #050505;
+      border-color: #fce100;
+    }
+
+    /* =========================================
+       TIMELINE LINE
+       ========================================= */
+    .timeline-line {
+      position: absolute;
+      left: 16px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, rgba(252, 225, 0, 0.5), rgba(255, 0, 85, 0.5), transparent);
+      z-index: 0;
+    }
+    @media (min-width: 768px) {
+      .timeline-line { left: 50%; transform: translateX(-50%); }
+    }
+  </style>
+</head>
+<body class="relative min-h-screen">
+
+  <div id="spotlight"></div>
+  <div id="cursor-dot"></div>
+  <div class="smoke-overlay"></div>
+
+  <!-- NAVIGATION -->
+  <div class="fixed top-6 left-6 md:top-8 md:left-8 z-50">
+    <a href="index.html" class="font-mono text-white text-xs md:text-sm tracking-[0.2em] uppercase hover:text-[#fce100] transition-colors cursor-trigger border border-white/20 px-4 py-2 hover:border-[#fce100] backdrop-blur-md bg-black/40">
+      [ ← Return to Base ]
+    </a>
+  </div>
+
+  <main class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-24 md:py-32 flex flex-col items-center">
+    
+    <!-- HEADER & BIO -->
+    <header class="w-full max-w-4xl text-center mb-24 cursor-trigger">
+      <h1 class="font-impact text-5xl md:text-7xl lg:text-8xl uppercase tracking-widest text-white mb-8 drop-shadow-[0_5px_0_rgba(255,0,85,0.5)]">
+        Career At <br><span class="glitch-text" data-text="A Glance">A Glance</span>
+      </h1>
+      
+      <div class="font-syne text-lg md:text-2xl text-gray-300 leading-relaxed mx-auto border-t border-b border-white/10 py-6 font-medium">
+        I am a music industry professional that has lived ear to ear and smile to smile with the Canadian Music Industry for 4+ years. Open to wear any hats needed, bringing in a vast network and expertise of all different shapes and sizes.
+      </div>
+    </header>
+
+    <!-- TIMELINE CONTAINER -->
+    <div class="relative w-full mb-32">
+      <!-- The vertical line -->
+      <div class="timeline-line"></div>
+
+      <!-- =========================================
+           SECTION 1: CIMA
+           ========================================= -->
+      <div class="w-full flex justify-start md:justify-center mb-16 relative z-10">
+        <div class="bg-black border-2 border-[#fce100] px-6 py-2 ml-10 md:ml-0 shadow-[4px_4px_0_#ff0055]">
+          <h2 class="font-impact text-3xl md:text-4xl text-[#fce100] uppercase tracking-widest">CIMA Operations</h2>
+        </div>
+      </div>
+
+      <!-- Item 1: CIMA Core -->
+      <div class="w-full flex flex-col md:flex-row justify-between items-center mb-16 md:mb-24 relative z-10 cursor-trigger group">
+        <div class="md:w-5/12 w-full pl-12 md:pl-0 md:text-right pr-0 md:pr-12 mb-4 md:mb-0">
+          <p class="font-mono text-[#00d2ff] tracking-[0.2em] font-bold">Jan 2025 - Present</p>
+          <h3 class="font-impact text-4xl text-white uppercase mt-2 group-hover:text-[#00d2ff] transition-colors">The Association</h3>
+        </div>
+        
+        <div class="absolute left-[13px] md:left-1/2 w-4 h-4 rounded-full bg-black border-2 border-[#00d2ff] transform md:-translate-x-1/2 shadow-[0_0_15px_#00d2ff]"></div>
+        
+        <div class="md:w-5/12 w-full pl-12 md:pl-12">
+          <div class="dossier-card p-6 md:p-8" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
+            <p class="font-mono text-sm text-gray-300 mb-6 leading-relaxed">
+              Operating as the biggest advocating body for independent music, championing the Canadian Music Fund and exporting domestic talent globally.
+            </p>
+            <div class="flex flex-wrap gap-2 font-mono text-xs uppercase tracking-wider font-bold">
+              <span class="tag px-3 py-1">Creative Strategy Lead</span>
+              <span class="tag px-3 py-1">Event Programming Lead</span>
+              <span class="tag px-3 py-1">Core Admin & Ops</span>
+            </div>
+            <a href="Option2.html" class="inline-block mt-6 font-syne text-[#00d2ff] hover:text-white border-b border-[#00d2ff] pb-1 uppercase text-sm tracking-widest">Read Dossier ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2: Make It Music -->
+      <div class="w-full flex flex-col md:flex-row-reverse justify-between items-center mb-16 md:mb-24 relative z-10 cursor-trigger group">
+        <div class="md:w-5/12 w-full pl-12 md:pl-0 md:text-left pr-0 md:pr-0 md:pl-12 mb-4 md:mb-0">
+          <p class="font-mono text-[#fce100] tracking-[0.2em] font-bold">Nov 2025</p>
+          <h3 class="font-impact text-4xl text-white uppercase mt-2 group-hover:text-[#fce100] transition-colors">Make It Music</h3>
+        </div>
+        
+        <div class="absolute left-[13px] md:left-1/2 w-4 h-4 rounded-full bg-black border-2 border-[#fce100] transform md:-translate-x-1/2 shadow-[0_0_15px_#fce100]"></div>
+        
+        <div class="md:w-5/12 w-full pl-12 md:pl-0 md:pr-12">
+          <div class="dossier-card p-6 md:p-8" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
+            <p class="font-mono text-sm text-gray-300 mb-6 leading-relaxed">
+              The only fully independent Music Industry Conference. Year 3 saw 700+ attendees, government officials, and international delegates across 2 massive days.
+            </p>
+            <div class="flex flex-wrap gap-2 font-mono text-xs uppercase tracking-wider font-bold">
+              <span class="tag px-3 py-1">Creative Strategy</span>
+              <span class="tag px-3 py-1">Programming & Mgmt</span>
+              <span class="tag px-3 py-1">Sponsorships & Equity</span>
+            </div>
+            <a href="Page3.html" class="inline-block mt-6 font-syne text-[#fce100] hover:text-white border-b border-[#fce100] pb-1 uppercase text-sm tracking-widest">Read Dossier ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3: JUNO Afterparty -->
+      <div class="w-full flex flex-col md:flex-row justify-between items-center mb-24 relative z-10 cursor-trigger group">
+        <div class="md:w-5/12 w-full pl-12 md:pl-0 md:text-right pr-0 md:pr-12 mb-4 md:mb-0">
+          <p class="font-mono text-[#ff0055] tracking-[0.2em] font-bold">March 2025, 2026</p>
+          <h3 class="font-impact text-4xl text-white uppercase mt-2 group-hover:text-[#ff0055] transition-colors">Indie Afterparty</h3>
+        </div>
+        
+        <div class="absolute left-[13px] md:left-1/2 w-4 h-4 rounded-full bg-black border-2 border-[#ff0055] transform md:-translate-x-1/2 shadow-[0_0_15px_#ff0055]"></div>
+        
+        <div class="md:w-5/12 w-full pl-12 md:pl-12">
+          <div class="dossier-card p-6 md:p-8" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
+            <p class="font-mono text-sm text-gray-300 mb-6 leading-relaxed">
+              One of the most reputable afterparties of the entire JUNO Awards week. Hosted by CIMA, drawing 600+ industry professionals in its most successful year to date.
+            </p>
+            <div class="flex flex-wrap gap-2 font-mono text-xs uppercase tracking-wider font-bold">
+              <span class="tag px-3 py-1">Creative Strategy</span>
+              <span class="tag px-3 py-1">Ticketing Ops</span>
+              <span class="tag px-3 py-1">Core Event Mgmt</span>
+            </div>
+            <a href="Afterparty.html" class="inline-block mt-6 font-syne text-[#ff0055] hover:text-white border-b border-[#ff0055] pb-1 uppercase text-sm tracking-widest">Read Dossier ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================
+           SECTION 2: FRNRZ
+           ========================================= -->
+      <div class="w-full flex justify-start md:justify-center mb-16 relative z-10 mt-12">
+        <div class="bg-black border-2 border-[#00ffff] px-6 py-2 ml-10 md:ml-0 shadow-[4px_4px_0_#fce100]">
+          <h2 class="font-impact text-3xl md:text-4xl text-[#00ffff] uppercase tracking-widest">Foreignerz</h2>
+        </div>
+      </div>
+
+      <!-- Item 4: FRNRZ -->
+      <div class="w-full flex flex-col md:flex-row-reverse justify-between items-center relative z-10 cursor-trigger group">
+        <div class="md:w-5/12 w-full pl-12 md:pl-0 md:text-left pr-0 md:pr-0 md:pl-12 mb-4 md:mb-0">
+          <p class="font-mono text-white tracking-[0.2em] font-bold">Jan 2026 - June 2026</p>
+          <h3 class="font-impact text-4xl text-white uppercase mt-2 group-hover:text-white transition-colors">Consulting</h3>
+        </div>
+        
+        <div class="absolute left-[13px] md:left-1/2 w-4 h-4 rounded-full bg-black border-2 border-white transform md:-translate-x-1/2 shadow-[0_0_15px_white]"></div>
+        
+        <div class="md:w-5/12 w-full pl-12 md:pl-0 md:pr-12">
+          <div class="dossier-card p-6 md:p-8" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
+            <p class="font-mono text-sm text-gray-300 mb-6 leading-relaxed">
+              Operating alongside the FRNRZ team, bridging the gap between raw, underground artistry and large-scale event execution, notably for Sled Island Festival [Calgary].
+            </p>
+            <div class="flex flex-wrap gap-2 font-mono text-xs uppercase tracking-wider font-bold">
+              <span class="tag px-3 py-1 text-[#fce100] border-[#fce100]">Creative Consulting</span>
+              <span class="tag px-3 py-1 text-[#fce100] border-[#fce100]">Creative Direction</span>
+              <span class="tag px-3 py-1 text-[#fce100] border-[#fce100]">Event Consulting</span>
+            </div>
+            <a href="FRNRZ.html" class="inline-block mt-6 font-syne text-white hover:text-[#00ffff] border-b border-white pb-1 uppercase text-sm tracking-widest">Read Dossier ↗</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Vanilla Tilt JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  
+  <script>
+    // Custom Spotlight & Cursor Logic
+    const spotlight = document.getElementById('spotlight');
+    const cursorDot = document.getElementById('cursor-dot');
+    const triggers = document.querySelectorAll('.cursor-trigger, a, .tag');
+
+    window.addEventListener('mousemove', (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      
+      spotlight.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+      cursorDot.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+    });
+
+    // Hover States
+    triggers.forEach(trigger => {
+      trigger.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
+      trigger.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
+    });
+  </script>
+</body>
+</html>
