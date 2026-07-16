@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Siddhant Shah</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Impact&family=Noto+Sans+Devanagari:wght@700&display=swap" rel="stylesheet">
+  
+  <style>
+    .font-impact { font-family: 'Impact', sans-serif; }
+    .font-mono-tech { font-family: 'Courier Prime', monospace; }
+    body { background-color: #3b44b8; color: white; overflow-x: hidden; }
+    .grunge-overlay { position: fixed; inset: 0; pointer-events: none; background-image: url('https://www.transparenttextures.com/patterns/absurdidad.png'); opacity: 0.14; mix-blend-mode: color-burn; z-index: 100; }
+    .blueprint-bg { position: fixed; inset: 0; background-image: linear-gradient(to right, rgba(199,235,240,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(199,235,240,0.08) 1px, transparent 1px); background-size: 40px 40px; z-index: 0; pointer-events: none; }
+    
+    input:focus, textarea:focus {
+      outline: none;
+      box-shadow: 4px 4px 0 #ff0000;
+      border-color: black;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-6 font-impact select-none flex flex-col justify-center items-center relative">
+
+  <div class="grunge-overlay"></div>
+  <div class="blueprint-bg"></div>
+
+  <!-- BACK TO BASE BUTTON -->
+  <div class="fixed top-8 left-8 md:top-10 md:left-10 z-50">
+    <a href="index.html" class="font-mono-tech font-bold text-xs md:text-sm tracking-[0.2em] uppercase hover:text-[#ff0000] transition-colors border-2 border-black px-4 py-2 hover:bg-black bg-[#c7ebf0] text-black drop-shadow-[3px_3px_0_#000000]">
+      [ ← Return to Base ]
+    </a>
+  </div>
+
+  <div class="relative z-10 w-full max-w-2xl bg-[#c7ebf0] border-2 border-black p-8 md:p-12 shadow-[12px_12px_0_#ff0000] text-black mx-auto mt-16 md:mt-0">
+    <h1 class="text-[#ff0000] text-5xl md:text-7xl leading-[0.85] font-black uppercase drop-shadow-[0_4px_0_#000000] tracking-tighter mb-8">
+      Incoming<br>Transmission
+    </h1>
+    
+    <form action="https://api.web3forms.com/submit" method="POST" class="font-mono-tech font-bold flex flex-col gap-5 text-sm md:text-base">
+      <!-- WEB3FORMS ACCESS KEY - USER WILL REPLACE THIS -->
+      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+      
+      <!-- HONEYPOT -->
+      <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+      <div class="flex flex-col gap-1">
+        <label for="name" class="uppercase tracking-widest text-xs">Name</label>
+        <input type="text" id="name" name="name" required class="bg-transparent border-2 border-black p-3 transition-shadow">
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="email" class="uppercase tracking-widest text-xs">Email</label>
+        <input type="email" id="email" name="email" required class="bg-transparent border-2 border-black p-3 transition-shadow">
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="phone" class="uppercase tracking-widest text-xs">Contact Number (Optional)</label>
+        <input type="tel" id="phone" name="phone" class="bg-transparent border-2 border-black p-3 transition-shadow">
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="subject" class="uppercase tracking-widest text-xs">Subject</label>
+        <input type="text" id="subject" name="subject" required class="bg-transparent border-2 border-black p-3 transition-shadow">
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="message" class="uppercase tracking-widest text-xs">Message</label>
+        <textarea id="message" name="message" rows="4" required class="bg-transparent border-2 border-black p-3 transition-shadow resize-y"></textarea>
+      </div>
+
+      <button type="submit" class="mt-4 font-impact bg-[#ff0000] text-white border-2 border-black text-2xl md:text-3xl uppercase tracking-wider py-4 hover:bg-black hover:text-[#ff0000] transition-colors shadow-[4px_4px_0_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]">
+        Send Message ↗
+      </button>
+    </form>
+  </div>
+
+</body>
+</html>
