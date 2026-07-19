@@ -28,6 +28,9 @@
 
   <div class="grunge-overlay"></div>
 
+  <!-- MOBILE INTRO OVERLAY -->
+  <div id="mobile-intro" class="fixed inset-0 z-[100] bg-[#3b44b8] overflow-hidden transition-opacity duration-1000 hidden"></div>
+
   <div id="main-canvas" class="relative w-full flex-grow bg-black/35 rounded-2xl border-2 border-black overflow-hidden flex flex-col justify-between p-6 cursor-pointer">
     <div class="blueprint-bg pointer-events-none"></div>
 
@@ -164,6 +167,30 @@
     let targetY = window.innerHeight / 2;
     let currentX = targetX;
     let currentY = targetY;
+    let isMobile = window.innerWidth < 768;
+
+    if (isMobile) {
+      box.style.display = 'none'; // Hide regular cursor box on mobile initially
+      const mobileIntro = document.getElementById('mobile-intro');
+      mobileIntro.classList.remove('hidden');
+      
+      let gridHTML = '';
+      for (let i = 0; i < 20; i++) {
+        let dir = i % 2 === 0 ? 'normal' : 'reverse';
+        let dur = 10 + Math.random() * 10;
+        gridHTML += `<div class="whitespace-nowrap text-[#ff0000] font-black uppercase text-3xl tracking-widest my-3" style="animation: marquee ${dur}s linear infinite ${dir}">EVERYTHING YOU NEED TO KNOW ABOUT.. EVERYTHING YOU NEED TO KNOW ABOUT.. EVERYTHING YOU NEED TO KNOW ABOUT..</div>`;
+      }
+      mobileIntro.innerHTML = `<div class="absolute inset-0 flex flex-col justify-center transform -rotate-12 scale-150">${gridHTML}</div>`;
+      
+      // Auto reveal after 3 seconds
+      setTimeout(() => {
+        if (!hasClicked) {
+          mobileIntro.style.opacity = '0';
+          setTimeout(() => { mobileIntro.style.display = 'none'; }, 1000);
+          canvas.click();
+        }
+      }, 3000);
+    }
 
     window.addEventListener('mousemove', (e) => {
       if (!hasClicked) { targetX = e.clientX; targetY = e.clientY; }
@@ -191,14 +218,22 @@
       hasClicked = true;
       navWrapper.style.pointerEvents = 'auto';
       box.classList.add('settled-box', 'outline-style-box');
-      box.style.transform = 'translate3d(0, 0, 0)';
-      
-      if (window.innerWidth < 768) {
-        box.style.left = '16px';
-        box.style.top = '16px';
-        box.style.fontSize = '1.2rem';
+      if (isMobile) {
+        box.style.display = 'block';
+        box.style.left = '50%';
+        box.style.top = 'auto';
+        box.style.bottom = '24px';
+        box.style.transform = 'translate3d(-50%, 0, 0)';
+        box.style.fontSize = '1rem';
         box.style.padding = '6px 12px';
+        box.style.whiteSpace = 'nowrap';
+        
+        // Pulse the nav letters to indicate they are clickable
+        const hindiNav = document.getElementById('hindi-nav');
+        hindiNav.classList.add('animate-pulse');
+        setTimeout(() => { hindiNav.classList.remove('animate-pulse'); }, 4500);
       } else {
+        box.style.transform = 'translate3d(0, 0, 0)';
         box.style.left = '32px';
         box.style.top = '28px';
         box.style.fontSize = '2.2rem';
