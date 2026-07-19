@@ -221,10 +221,10 @@
       if (isMobile) {
         box.style.display = 'block';
         box.style.left = '50%';
-        box.style.top = 'auto';
-        box.style.bottom = '24px';
+        box.style.top = '105px';
+        box.style.bottom = 'auto';
         box.style.transform = 'translate3d(-50%, 0, 0)';
-        box.style.fontSize = '1rem';
+        box.style.fontSize = '1.1rem';
         box.style.padding = '6px 12px';
         box.style.whiteSpace = 'nowrap';
         
@@ -232,6 +232,12 @@
         const hindiNav = document.getElementById('hindi-nav');
         hindiNav.classList.add('animate-pulse');
         setTimeout(() => { hindiNav.classList.remove('animate-pulse'); }, 4500);
+
+        const hint = document.getElementById('lonely-letters-hint');
+        hint.innerText = 'TAP LETTERS TO EXPLORE PAGES';
+        hint.classList.add('font-bold', 'text-[#ff0000]');
+        hint.classList.remove('text-[#c7ebf0]/90');
+        hint.style.display = 'block';
       } else {
         box.style.transform = 'translate3d(0, 0, 0)';
         box.style.left = '32px';
@@ -246,7 +252,9 @@
       footerMarquee.style.opacity = '1';
       navWrapper.style.opacity = '1';
       toranSeparator.style.opacity = '1';
-      document.getElementById('lonely-letters-hint').style.display = 'none';
+      if (!isMobile) {
+        document.getElementById('lonely-letters-hint').style.display = 'none';
+      }
     });
   </script>
 </body>
