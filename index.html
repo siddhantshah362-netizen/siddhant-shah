@@ -219,15 +219,20 @@
       navWrapper.style.pointerEvents = 'auto';
       box.classList.add('settled-box', 'outline-style-box');
       if (isMobile) {
-        box.style.position = 'absolute';
-        box.style.display = 'block';
-        box.style.left = '50%';
-        box.style.top = '105px';
+        box.style.position = 'relative';
+        box.style.display = 'inline-block';
+        box.style.left = 'auto';
+        box.style.top = 'auto';
         box.style.bottom = 'auto';
-        box.style.transform = 'translate3d(-50%, 0, 0)';
+        box.style.transform = 'none';
         box.style.fontSize = '1.1rem';
         box.style.padding = '6px 12px';
         box.style.whiteSpace = 'nowrap';
+        box.style.marginBottom = '1.5rem';
+        
+        // Move it into the document flow above the name
+        const namePanel = document.getElementById('name-panel');
+        namePanel.insertBefore(box, namePanel.firstChild);
         
         // Pulse the nav letters to indicate they are clickable
         const hindiNav = document.getElementById('hindi-nav');
