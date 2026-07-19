@@ -219,6 +219,7 @@
       navWrapper.style.pointerEvents = 'auto';
       box.classList.add('settled-box', 'outline-style-box');
       if (isMobile) {
+        box.style.position = 'absolute';
         box.style.display = 'block';
         box.style.left = '50%';
         box.style.top = '105px';
@@ -235,8 +236,8 @@
 
         const hint = document.getElementById('lonely-letters-hint');
         hint.innerText = 'TAP LETTERS TO EXPLORE PAGES';
-        hint.classList.add('font-bold', 'text-[#ff0000]');
-        hint.classList.remove('text-[#c7ebf0]/90');
+        hint.classList.remove('text-[#c7ebf0]/90', 'text-xs');
+        hint.classList.add('font-black', 'text-[#ff0000]', 'text-sm', 'bg-black/80', 'px-3', 'py-1', 'border', 'border-[#ff0000]', 'drop-shadow-xl');
         hint.style.display = 'block';
       } else {
         box.style.transform = 'translate3d(0, 0, 0)';
