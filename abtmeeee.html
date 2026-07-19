@@ -89,7 +89,7 @@
   </div>
   <!-- ================= BOUNCING ARROW INDICATOR ================= -->
   <div id="scroll-indicator" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-10 transition-opacity duration-300 animate-bounce">
-    <svg class="w-12 h-12 text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+    <svg class="w-16 h-16 md:w-12 md:h-12 text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
     </svg>
   </div>
@@ -280,7 +280,8 @@
       }
       
       const easeScale = scaleProgress * scaleProgress * scaleProgress;
-      const currentScale = 1 + (easeScale * 14); 
+      let scaleMultiplier = window.innerWidth < 768 ? 35 : 14;
+      const currentScale = 1 + (easeScale * scaleMultiplier); 
       sleeve.style.transform = `scale3d(${currentScale}, ${currentScale}, 1)`;
 
       // Fade out ONLY the photo center inside the matchbox as it zooms

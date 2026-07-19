@@ -65,14 +65,14 @@
           <a href="Afterparty.html" onclick="event.stopPropagation()" class="cursor-pointer hover:scale-110 transition-transform duration-300 block relative z-50">
             <div class="nav-letter relative font-hindi text-3xl md:text-4xl text-[#c7ebf0] hover:text-[#ff0000] transition-colors duration-200 py-2">
               घ
-              <span class="nav-tooltip absolute top-full left-1/2 transform -translate-x-1/2 translate-y-2 opacity-0 scale-95 transition-all duration-200 font-mono-tech text-sm bg-black border border-[#ff0000] text-white px-4 py-1.5 whitespace-nowrap rounded tracking-wider pointer-events-none shadow-xl">AFTER PARTY</span>
+              <span class="nav-tooltip absolute top-full md:left-1/2 right-0 md:right-auto transform md:-translate-x-1/2 translate-y-2 opacity-0 scale-95 transition-all duration-200 font-mono-tech text-sm bg-black border border-[#ff0000] text-white px-4 py-1.5 whitespace-nowrap rounded tracking-wider pointer-events-none shadow-xl">AFTER PARTY</span>
             </div>
           </a>
           <!-- 5. FRNRZ -->
           <a href="FRNRZ.html" onclick="event.stopPropagation()" class="cursor-pointer hover:scale-110 transition-transform duration-300 block relative z-50">
             <div class="nav-letter relative font-hindi text-3xl md:text-4xl text-[#c7ebf0] hover:text-[#ff0000] transition-colors duration-200 py-2">
               ङ
-              <span class="nav-tooltip absolute top-full left-1/2 transform -translate-x-1/2 translate-y-2 opacity-0 scale-95 transition-all duration-200 font-mono-tech text-sm bg-black border border-[#ff0000] text-white px-4 py-1.5 whitespace-nowrap rounded tracking-wider pointer-events-none shadow-xl">FRNRZ</span>
+              <span class="nav-tooltip absolute top-full md:left-1/2 right-0 md:right-auto transform md:-translate-x-1/2 translate-y-2 opacity-0 scale-95 transition-all duration-200 font-mono-tech text-sm bg-black border border-[#ff0000] text-white px-4 py-1.5 whitespace-nowrap rounded tracking-wider pointer-events-none shadow-xl">FRNRZ</span>
             </div>
           </a>
         </nav>
@@ -169,6 +169,13 @@
       if (!hasClicked) { targetX = e.clientX; targetY = e.clientY; }
     });
 
+    window.addEventListener('touchmove', (e) => {
+      if (!hasClicked && e.touches.length > 0) { 
+        targetX = e.touches[0].clientX; 
+        targetY = e.touches[0].clientY; 
+      }
+    }, {passive: true});
+
     function lerpCursor() {
       if (!hasClicked) {
         currentX += (targetX - currentX) * 0.09;
@@ -185,10 +192,18 @@
       navWrapper.style.pointerEvents = 'auto';
       box.classList.add('settled-box', 'outline-style-box');
       box.style.transform = 'translate3d(0, 0, 0)';
-      box.style.left = '32px';
-      box.style.top = '28px';
-      box.style.fontSize = '2.2rem';
-      box.style.padding = '8px 16px';
+      
+      if (window.innerWidth < 768) {
+        box.style.left = '16px';
+        box.style.top = '16px';
+        box.style.fontSize = '1.2rem';
+        box.style.padding = '6px 12px';
+      } else {
+        box.style.left = '32px';
+        box.style.top = '28px';
+        box.style.fontSize = '2.2rem';
+        box.style.padding = '8px 16px';
+      }
       namePanel.style.opacity = '1';
       namePanel.style.transform = 'translateY(0)';
       artworkPanel.style.opacity = '1';
