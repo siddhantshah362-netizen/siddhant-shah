@@ -168,8 +168,9 @@
     let currentX = targetX;
     let currentY = targetY;
     let isMobile = window.innerWidth < 768;
+    const hasVisited = sessionStorage.getItem('hasVisited') === 'true';
 
-    if (isMobile) {
+    if (isMobile && !hasVisited) {
       box.style.display = 'none'; // Hide regular cursor box on mobile initially
       const mobileIntro = document.getElementById('mobile-intro');
       mobileIntro.classList.remove('hidden');
@@ -204,19 +205,33 @@
     }, {passive: true});
 
     function lerpCursor() {
-      if (!hasClicked) {
+      if (!hasClicked && !hasVisited) {
         currentX += (targetX - currentX) * 0.09;
         currentY += (targetY - currentY) * 0.09;
         box.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
         requestAnimationFrame(lerpCursor);
       }
     }
-    requestAnimationFrame(lerpCursor);
+    if (!hasVisited) {
+      requestAnimationFrame(lerpCursor);
+    }
 
     canvas.addEventListener('click', () => {
       if (hasClicked) return;
       hasClicked = true;
+      sessionStorage.setItem('hasVisited', 'true');
       navWrapper.style.pointerEvents = 'auto';
+      
+      if (hasVisited) {
+        // Disable transitions for an instant snap on return
+        namePanel.style.transition = 'none';
+        artworkPanel.style.transition = 'none';
+        footerMarquee.style.transition = 'none';
+        navWrapper.style.transition = 'none';
+        toranSeparator.style.transition = 'none';
+        box.style.transition = 'none';
+      }
+      
       box.classList.add('settled-box', 'outline-style-box');
       if (isMobile) {
         box.style.position = 'relative';
@@ -259,6 +274,12 @@
       navWrapper.style.opacity = '1';
       toranSeparator.style.opacity = '1';
     });
+
+    // Auto-trigger click if returning from a sub-page
+    if (hasVisited) {
+      document.getElementById('mobile-intro').style.display = 'none';
+      canvas.click();
+    }
   </script>
 </body>
 </html>
